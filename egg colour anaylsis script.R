@@ -1,13 +1,7 @@
 ##Egg data exploration - correlation testing,PCAs
 setwd("~/Jasmine uni/Imperial/Summer project/Jasmine/Eggs/Geolocator eggs")
-##merge 2017 egg colouration data with 2017 prov data, adult info 
-#get info
-eggall<-read.csv("egg_indexes_ALL_FINAL.csv")
-eggadult<-read.csv("adults_info_1718.csv")
-pr17<-read.csv("avperparent17.csv")
-pr18<-read.csv("avperparent18.csv")
 egg<-read.csv("alleggsnew2019_hsv.csv")
-
+egg2<-read.csv("pcafinalnestshell.csv")
 
 ##I want to check that HSV components are correlated with particular RGB components
 ##should be as derived from RGB values
@@ -223,20 +217,9 @@ satvalue<-grid.arrange( arrangeGrob(SV, top="Shell Saturation vs Value/Brightnes
 ##Now Principle component analysis to see whether to use RGB or HSV 
 ##most of the variation between eggs and therefore should be considered
 
-require(psych)
-egg_pca<- princomp(egg[,6:43]) 
-summary(egg_pca)
-loadings(egg_pca)
-
-library("factoextra")
-
-
-
-
 
 library("FactoMineR")
-egg<-read.csv("pcafinalnestshell.csv")
-res.pca <- PCA(egg, graph = FALSE)
+res.pca <- PCA(egg2, graph = FALSE)
 eig.val <- get_eigenvalue(res.pca) # eigen values
 eig.val  
 ##here you can see that dim. 1 and 2 explain most of the variablilty in the data (92%)
